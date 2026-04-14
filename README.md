@@ -61,14 +61,14 @@ All tests are **integration tests** — they call the real TwelveLabs API. There
 
 ### Test Categories
 
-| Category | File location | What it covers |
-|---|---|---|
-| Successful operations | `TestSuccessfulSearch` | Text search with visual / audio / transcription options, grouping by clip vs video, `or`/`and` operators, user metadata |
-| Pagination | `TestPagination` | `page_limit` bounds, `page_info` fields, `next_page_token`, `search.retrieve()` |
-| Transcription options | `TestTranscriptionOptions` | `lexical`, `semantic`, and both combined |
-| Filtering | `TestFiltering` | Duration range filter, filter by video ID, filter that produces empty results |
-| Edge cases | `TestEdgeCases` | Unlikely query, long query text (~150 tokens), all three search options together, rank ordering |
-| Error handling | `TestErrorHandling` | Non-existent index (404), invalid API key (401/403), `page_limit > 50` (400), malformed filter JSON (400), empty `search_options` (400), unsupported search option value (400) |
+| ID | Category | Class | What it covers |
+|---|---|---|---|
+| SS-01 ~ SS-13 | Successful operations | `TestSuccessfulSearch` | Text search with visual / audio / transcription options, grouping by clip vs video, `or`/`and` operators, user metadata |
+| PA-01 ~ PA-06 | Pagination | `TestPagination` | `page_limit` bounds, `page_info` fields, `next_page_token`, `search.retrieve()` |
+| TR-01 ~ TR-03 | Transcription options | `TestTranscriptionOptions` | `lexical`, `semantic`, and both combined |
+| FI-01 ~ FI-03 | Filtering | `TestFiltering` | Duration range filter, filter by video ID, filter that produces empty results |
+| EC-01 ~ EC-05 | Edge cases | `TestEdgeCases` | Unlikely query, long query text (~150 tokens), all three search options together, rank ordering |
+| EH-01 ~ EH-06 | Error handling | `TestErrorHandling` | Non-existent index (404), invalid API key (401/403), `page_limit > 50` (400), malformed filter JSON (400), empty `search_options` (400), unsupported search option value (400) |
 
 ### Parameters Tested
 
