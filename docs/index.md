@@ -1,3 +1,8 @@
+---
+layout: default
+title: TwelveLabs SDK 검색 테스트 스위트
+---
+
 # TwelveLabs SDK 검색 테스트 스위트
 
 TwelveLabs Python SDK의 `search.create()` 메서드에 대한 자동화 통합 테스트 문서입니다.
