@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       checks: write
-      contents: read
+      contents: write
 
     steps:
       - uses: actions/checkout@v4
@@ -30,7 +30,7 @@ jobs:
         env:
           TWELVELABS_API_KEY: ${{ secrets.TWELVELABS_API_KEY }}
           TWELVELABS_INDEX_ID: ${{ secrets.TWELVELABS_INDEX_ID }}
-        run: pytest --junitxml=report.xml
+        run: pytest --junitxml=report.xml --alluredir=allure-results
 
       - name: Publish test report
         uses: dorny/test-reporter@v1
@@ -39,3 +39,29 @@ jobs:
           name: Test Results
           path: report.xml
           reporter: java-junit
+
+      - name: Get Allure history
+        uses: actions/checkout@v4
+        if: always()
+        continue-on-error: true
+        with:
+          ref: gh-pages
+          path: gh-pages
+
+      - name: Generate Allure report
+        uses: simple-elf/allure-report-action@master
+        if: always()
+        with:
+          allure_results: allure-results
+          gh_pages: gh-pages
+          allure_report: allure-report
+          allure_history: allure-history
+          keep_reports: 20
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        if: always()
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: allure-history
