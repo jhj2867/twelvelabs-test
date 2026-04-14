@@ -68,18 +68,10 @@ jobs:
         if: always()
         run: allure generate allure-results -o allure-report --clean
 
-      - name: Prepare deploy directory
-        if: always()
-        run: |
-          mkdir -p deploy/allure
-          cp -r docs/. deploy/
-          cp -r allure-report/. deploy/allure/
-
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         if: always()
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
-          publish_dir: deploy
-          enable_jekyll: true
+          publish_dir: allure-report
