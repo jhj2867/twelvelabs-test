@@ -27,4 +27,12 @@ jobs:
         env:
           TWELVELABS_API_KEY: ${{ secrets.TWELVELABS_API_KEY }}
           TWELVELABS_INDEX_ID: ${{ secrets.TWELVELABS_INDEX_ID }}
-        run: pytest
+        run: pytest --junitxml=report.xml
+
+      - name: Publish test report
+        uses: dorny/test-reporter@v1
+        if: always()
+        with:
+          name: Test Results
+          path: report.xml
+          reporter: java-junit
