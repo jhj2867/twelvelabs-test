@@ -46,6 +46,10 @@ pip install twelvelabs
 
 ### 4. 인증 정보 설정
 
+> [!IMPORTANT]
+> **이 단계를 완료하지 않으면 테스트가 실행되지 않습니다.**
+> 모든 테스트는 실제 TwelveLabs API를 호출하며, 유효한 API 키와 인덱스 ID가 없으면 즉시 오류가 발생합니다.
+
 프로젝트 루트에 `.env` 파일을 생성하고 아래 값을 입력합니다:
 
 ```
@@ -55,7 +59,7 @@ TWELVELABS_INDEX_ID=<인덱스 ID>
 
 API 키와 인덱스 ID는 [TwelveLabs Playground](https://playground.twelvelabs.io/)에서 확인할 수 있습니다.
 
-> **주의:** 모든 테스트는 실제 API를 호출합니다. 목(mock)은 사용하지 않습니다. 유효한 API 키와 영상이 인덱싱된 인덱스가 반드시 필요합니다.
+추가로, 인덱스에 **영상이 최소 1개 이상 업로드·인덱싱되어 있어야** 정상 동작 테스트가 실행됩니다.
 
 ---
 

@@ -118,4 +118,12 @@ twelvelabs-test/
 
 ---
 
+## 테스트 결과
+
+GitHub Actions에서 매 push·PR마다 자동으로 테스트가 실행됩니다.
+
+**[최신 테스트 결과 확인하기](https://github.com/jhj2867/twelvelabs-test/actions/workflows/test.yml)**
+
+---
+
 [GitHub 레포지토리 바로가기](https://github.com/jhj2867/twelvelabs-test)
