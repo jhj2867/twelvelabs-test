@@ -1,77 +1,77 @@
-# TwelveLabs SDK – Search Test Suite
+# TwelveLabs SDK – 검색 테스트 스위트
 
-Automated integration tests for the `search.create()` method of the [TwelveLabs Python SDK](https://github.com/twelvelabs-io/twelvelabs-python).
-
----
-
-## Prerequisites
-
-- Python 3.9+
-- A TwelveLabs account with an API key
-- An index that already contains at least one uploaded and indexed video
+[TwelveLabs Python SDK](https://github.com/twelvelabs-io/twelvelabs-python)의 `search.create()` 메서드에 대한 자동화 통합 테스트입니다.
 
 ---
 
-## Setup
+## 사전 요구사항
 
-### 1. Clone the repository
+- Python 3.9 이상
+- TwelveLabs 계정 및 API 키
+- 영상이 최소 1개 이상 업로드·인덱싱된 인덱스
+
+---
+
+## 설치 및 설정
+
+### 1. 레포지토리 클론
 
 ```bash
 git clone https://github.com/jhj2867/twelvelabs-test.git
 cd twelvelabs-test
 ```
 
-### 2. Create and activate a virtual environment
+### 2. 가상환경 생성 및 활성화
 
 ```bash
 python -m venv .venv
 source .venv/bin/activate   # Windows: .venv\Scripts\activate
 ```
 
-### 3. Install the TwelveLabs SDK and dependencies
+### 3. TwelveLabs SDK 및 의존성 설치
 
 ```bash
 pip install -r requirements.txt
 ```
 
-This installs the TwelveLabs Python SDK (`twelvelabs==1.2.2`) along with pytest and all required packages.
+`requirements.txt`에는 TwelveLabs Python SDK(`twelvelabs==1.2.2`)와 pytest 등 필요한 패키지가 모두 포함되어 있습니다.
 
-To install the SDK standalone:
+SDK만 단독으로 설치하려면:
 
 ```bash
 pip install twelvelabs
 ```
 
-### 4. Configure credentials
+### 4. 인증 정보 설정
 
-Create a `.env` file in the project root and fill in your values:
+프로젝트 루트에 `.env` 파일을 생성하고 아래 값을 입력합니다:
 
 ```
-TWELVELABS_API_KEY=<your API key from the Playground>
-TWELVELABS_INDEX_ID=<the index ID containing your uploaded video>
+TWELVELABS_API_KEY=<API 키>
+TWELVELABS_INDEX_ID=<인덱스 ID>
 ```
 
-You can obtain both from the [TwelveLabs Playground](https://playground.twelvelabs.io/).
+API 키와 인덱스 ID는 [TwelveLabs Playground](https://playground.twelvelabs.io/)에서 확인할 수 있습니다.
 
-> **Note:** All tests make real API calls. There are no mocks. A valid API key and an index with at least one indexed video are required before running the tests.
+> **주의:** 모든 테스트는 실제 API를 호출합니다. 목(mock)은 사용하지 않습니다. 유효한 API 키와 영상이 인덱싱된 인덱스가 반드시 필요합니다.
 
 ---
 
-## Running the Tests
+## 테스트 실행
 
-Run the full suite:
+전체 테스트 실행:
 
 ```bash
 pytest
 ```
 
-Run with verbose output:
+상세 출력과 함께 실행:
 
 ```bash
 pytest -v
 ```
 
-Run a specific category:
+카테고리별 실행:
 
 ```bash
 pytest tests/test_search.py::TestSuccessfulSearch -v
@@ -79,7 +79,7 @@ pytest tests/test_search.py::TestPagination -v
 pytest tests/test_search.py::TestErrorHandling -v
 ```
 
-Run a single test by ID:
+단일 테스트 실행:
 
 ```bash
 pytest tests/test_search.py::TestSuccessfulSearch::test_SS01_returns_search_results_type -v
@@ -87,51 +87,51 @@ pytest tests/test_search.py::TestSuccessfulSearch::test_SS01_returns_search_resu
 
 ---
 
-## Test Structure
+## 테스트 구성
 
-### Categories
+### 카테고리
 
-| ID | Category | Class | Count | What it covers |
+| ID | 카테고리 | 클래스 | 개수 | 테스트 내용 |
 |---|---|---|---|---|
-| SS-01 ~ SS-13 | Successful operations | `TestSuccessfulSearch` | 13 | Text search with visual / audio / transcription options, grouping by clip vs video, `or`/`and` operators, user metadata |
-| PA-01 ~ PA-06 | Pagination | `TestPagination` | 6 | `page_limit` bounds, `page_info` fields, `next_page_token`, `search.retrieve()` |
-| TR-01 ~ TR-03 | Transcription options | `TestTranscriptionOptions` | 3 | `lexical`, `semantic`, and both combined |
-| FI-01 ~ FI-03 | Filtering | `TestFiltering` | 3 | Duration range filter, filter by video ID, filter that produces empty results |
-| EC-01 ~ EC-05 | Edge cases | `TestEdgeCases` | 5 | Unlikely query, long query text (~150 tokens), all three search options together, rank ordering |
-| EH-01 ~ EH-06 | Error handling | `TestErrorHandling` | 6 | Non-existent index (404), invalid API key (401/403), `page_limit > 50` (400), malformed filter JSON (400), empty `search_options` (400), unsupported search option value (400) |
+| SS-01 ~ SS-13 | 정상 동작 | `TestSuccessfulSearch` | 13 | visual·audio·transcription 검색, clip·video 그룹핑, `or`/`and` 연산자, 사용자 메타데이터 |
+| PA-01 ~ PA-06 | 페이지네이션 | `TestPagination` | 6 | `page_limit` 경계값, `page_info` 필드, `next_page_token`, `search.retrieve()` |
+| TR-01 ~ TR-03 | 트랜스크립션 옵션 | `TestTranscriptionOptions` | 3 | `lexical`, `semantic`, 둘 다 사용 |
+| FI-01 ~ FI-03 | 필터링 | `TestFiltering` | 3 | 재생 시간 범위 필터, 영상 ID 필터, 잘못된 ID 필터 |
+| EC-01 ~ EC-05 | 엣지 케이스 | `TestEdgeCases` | 5 | 검색 결과 없는 쿼리, 긴 쿼리 텍스트(~150 토큰), 세 가지 옵션 동시 사용, 순위 정렬 |
+| EH-01 ~ EH-06 | 에러 처리 | `TestErrorHandling` | 6 | 존재하지 않는 인덱스(404), 잘못된 API 키(401/403), `page_limit > 50`(400), 잘못된 필터 JSON(400), 빈 `search_options`(400), 지원하지 않는 검색 옵션(400) |
 
-**Total: 36 tests**
+**총 36개 테스트**
 
-### Parameters Tested
+### 테스트 대상 파라미터
 
-| Parameter | Values / scenarios |
+| 파라미터 | 테스트 값 / 시나리오 |
 |---|---|
-| `search_options` | `visual`, `audio`, `transcription`, all three, empty list, invalid value |
-| `query_text` | Normal, long (~150 tokens), unlikely match |
-| `group_by` | `clip` (default), `video` |
+| `search_options` | `visual`, `audio`, `transcription`, 세 가지 모두, 빈 리스트, 잘못된 값 |
+| `query_text` | 일반, 긴 텍스트(~150 토큰), 결과 없는 쿼리 |
+| `group_by` | `clip`(기본값), `video` |
 | `operator` | `or`, `and` |
-| `page_limit` | `1`, `5`, `50` (max), `51` (over max) |
-| `transcription_options` | `lexical`, `semantic`, both |
-| `filter` | Duration range, ID list, malformed JSON |
+| `page_limit` | `1`, `5`, `50`(최대), `51`(초과) |
+| `transcription_options` | `lexical`, `semantic`, 둘 다 |
+| `filter` | 재생 시간 범위, ID 리스트, 잘못된 JSON |
 | `include_user_metadata` | `True`, `False` |
 
-Parameters not tested: `query_media_url`, `query_media_file`, `query_media_type` (image queries). These require publicly accessible image URLs and were out of scope for this assignment.
+미테스트 파라미터: `query_media_url`, `query_media_file`, `query_media_type` (이미지 쿼리). 공개 접근 가능한 이미지 URL이 필요하여 이번 범위에서 제외했습니다.
 
 ---
 
-## Testing Approach
+## 테스트 방식
 
-All tests are **integration tests** — they call the real TwelveLabs API. There are no mocks. This decision was made to validate actual SDK behavior end-to-end, as the assignment explicitly asks to "focus on testing the SDK's functionality rather than direct API calls."
+모든 테스트는 **통합 테스트**로, 실제 TwelveLabs API를 호출합니다. 목(mock)은 사용하지 않습니다. SDK의 실제 동작을 엔드투엔드로 검증하기 위한 의도적인 선택입니다.
 
-### Key Assumptions
+### 주요 전제사항
 
-- The index already has at least one video indexed before running tests. Creating indexes and uploading videos is explicitly out of scope per the assignment.
-- Test method: `client.search.create()`. The SDK documentation refers to a `query()` method, but the installed SDK (`twelvelabs==1.2.2`) exposes `create()` on the search client. The return type is `SearchResults` (not `SyncPager[SearchItem]` as the docs describe), with `data`, `page_info`, and `search_pool` fields.
-- Error tests that use the `index_id` fixture (e.g., `test_EH06_unsupported_search_option_raises_bad_request`) require valid credentials to run correctly, since the API validates authorization before parameter values.
+- 테스트 실행 전 인덱스에 최소 1개의 영상이 인덱싱되어 있어야 합니다. 인덱스 생성 및 영상 업로드는 테스트 범위에서 제외했습니다.
+- 호출 메서드: `client.search.create()`. SDK 문서에는 `query()` 메서드가 언급되어 있으나, 설치된 SDK(`twelvelabs==1.2.2`)에서는 `create()`를 사용합니다. 반환 타입은 문서상의 `SyncPager[SearchItem]`이 아닌 `SearchResults`이며, `data`, `page_info`, `search_pool` 필드를 포함합니다.
+- 에러 처리 테스트 중 `index_id` 픽스처를 사용하는 테스트(예: `test_EH06`)는 API가 파라미터 유효성 검사 전에 인증을 먼저 확인하므로 유효한 인증 정보가 필요합니다.
 
 ---
 
-## SDK Version
+## SDK 버전
 
 ```
 twelvelabs==1.2.2
