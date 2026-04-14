@@ -58,6 +58,10 @@ jobs:
           allure_history: allure-history
           keep_reports: 20
 
+      - name: Remove .git from allure-history
+        run: rm -rf allure-history/.git
+        if: always()
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         if: always()
