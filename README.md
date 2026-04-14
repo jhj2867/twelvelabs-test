@@ -2,6 +2,8 @@
 
 [TwelveLabs Python SDK](https://github.com/twelvelabs-io/twelvelabs-python)의 `search.create()` 메서드에 대한 자동화 통합 테스트입니다.
 
+**[📄 테스트 문서 보기 (GitHub Pages)](https://jhj2867.github.io/twelvelabs-test/)**
+
 ---
 
 ## 사전 요구사항
