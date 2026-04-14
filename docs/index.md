@@ -122,7 +122,9 @@ twelvelabs-test/
 
 GitHub Actions에서 매 push·PR마다 자동으로 테스트가 실행됩니다.
 
-**[최신 테스트 결과 확인하기](https://github.com/jhj2867/twelvelabs-test/actions/workflows/test.yml)**
+**[Allure 테스트 리포트 보기 (Trend 차트 포함)](https://jhj2867.github.io/twelvelabs-test/allure/)** — 실행 이력, 통과·실패 추이, 카테고리별 결과를 확인할 수 있습니다.
+
+**[GitHub Actions 실행 내역](https://github.com/jhj2867/twelvelabs-test/actions/workflows/test.yml)**
 
 ---
 
