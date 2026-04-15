@@ -194,8 +194,8 @@
   <div class="card">
     <h2>📋 테스트 현황</h2>
     <div class="stats">
-      <div class="stat"><div class="stat-number">36</div><div class="stat-label">전체 테스트</div></div>
-      <div class="stat"><div class="stat-number">6</div><div class="stat-label">카테고리</div></div>
+      <div class="stat"><div class="stat-number">39</div><div class="stat-label">전체 테스트</div></div>
+      <div class="stat"><div class="stat-number">7</div><div class="stat-label">카테고리</div></div>
       <div class="stat"><div class="stat-number">8</div><div class="stat-label">테스트 파라미터</div></div>
       <div class="stat"><div class="stat-number">1.2.2</div><div class="stat-label">SDK 버전</div></div>
     </div>
@@ -212,7 +212,8 @@
         <tr><td><span class="tag">TR-01~03</span></td><td>트랜스크립션 옵션</td><td><code>TestTranscriptionOptions</code></td><td>3</td></tr>
         <tr><td><span class="tag">FI-01~03</span></td><td>필터링</td><td><code>TestFiltering</code></td><td>3</td></tr>
         <tr><td><span class="tag">EC-01~05</span></td><td>엣지 케이스</td><td><code>TestEdgeCases</code></td><td>5</td></tr>
-        <tr><td><span class="tag">EH-01~06</span></td><td>에러 처리</td><td><code>TestErrorHandling</code></td><td>6</td></tr>
+        <tr><td><span class="tag">EH-01~08</span></td><td>에러 처리</td><td><code>TestErrorHandling</code></td><td>8</td></tr>
+        <tr><td><span class="tag">PI-01</span></td><td>파라미터 상호작용</td><td><code>TestParameterInteraction</code></td><td>1</td></tr>
       </tbody>
     </table>
   </div>
@@ -249,6 +250,7 @@
     <h3>제외한 항목</h3>
     <ul>
       <li><code>query_media_url</code> / <code>query_media_file</code> / <code>query_media_type</code> — 공개 이미지 URL 필요, 이번 범위 제외</li>
+      <li><code>sort_option</code> — 공식 문서(1.3)에 명시되어 있으나 실제 SDK 1.2.2에 존재하지 않아 제외</li>
       <li>인덱스 생성 및 영상 업로드 — 사전 조건으로 간주</li>
     </ul>
   </div>
@@ -264,6 +266,7 @@
         <tr><td>메서드명</td><td><code>client.search.query()</code></td><td><code>client.search.create()</code></td></tr>
         <tr><td>반환 타입</td><td><code>SyncPager[SearchItem]</code></td><td><code>SearchResults</code></td></tr>
         <tr><td>응답 필드</td><td>명세 없음</td><td><code>data</code>, <code>page_info</code>, <code>search_pool</code></td></tr>
+        <tr><td><code>sort_option</code></td><td>문서에 명시</td><td>미지원 (파라미터 없음)</td></tr>
       </tbody>
     </table>
   </div>

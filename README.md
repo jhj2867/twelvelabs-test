@@ -106,9 +106,10 @@ pytest tests/test_search.py::TestSuccessfulSearch::test_SS01_returns_search_resu
 | TR-01 ~ TR-03 | 트랜스크립션 옵션 | `TestTranscriptionOptions` | 3 | `lexical`, `semantic`, 둘 다 사용 |
 | FI-01 ~ FI-03 | 필터링 | `TestFiltering` | 3 | 재생 시간 범위 필터, 영상 ID 필터, 잘못된 ID 필터 |
 | EC-01 ~ EC-05 | 엣지 케이스 | `TestEdgeCases` | 5 | 검색 결과 없는 쿼리, 긴 쿼리 텍스트(~150 토큰), 세 가지 옵션 동시 사용, 순위 정렬 |
-| EH-01 ~ EH-06 | 에러 처리 | `TestErrorHandling` | 6 | 존재하지 않는 인덱스(404), 잘못된 API 키(401/403), `page_limit > 50`(400), 잘못된 필터 JSON(400), 빈 `search_options`(400), 지원하지 않는 검색 옵션(400) |
+| EH-01 ~ EH-08 | 에러 처리 | `TestErrorHandling` | 8 | 존재하지 않는 인덱스(404), 잘못된 API 키(401/403), `page_limit > 50`(400), 잘못된 필터 JSON(400), 빈 `search_options`(400), 지원하지 않는 검색 옵션(400), 빈 `query_text`(400), `page_limit=0`(400) |
+| PI-01 | 파라미터 상호작용 | `TestParameterInteraction` | 1 | `transcription_options`과 non-transcription `search_options` 동시 사용 |
 
-**총 36개 테스트**
+**총 39개 테스트**
 
 ### 테스트 대상 파라미터
 
@@ -123,7 +124,7 @@ pytest tests/test_search.py::TestSuccessfulSearch::test_SS01_returns_search_resu
 | `filter` | 재생 시간 범위, ID 리스트, 잘못된 JSON |
 | `include_user_metadata` | `True`, `False` |
 
-미테스트 파라미터: `query_media_url`, `query_media_file`, `query_media_type` (이미지 쿼리). 공개 접근 가능한 이미지 URL이 필요하여 이번 범위에서 제외했습니다.
+미테스트 파라미터: `query_media_url`, `query_media_file`, `query_media_type` (이미지 쿼리). 공개 접근 가능한 이미지 URL이 필요하여 이번 범위에서 제외했습니다. `sort_option`은 공식 문서(1.3)에 언급되어 있으나 실제 SDK 1.2.2에 존재하지 않아 제외했습니다.
 
 ---
 
@@ -155,5 +156,6 @@ twelvelabs==1.2.2
 | 반환 타입 | `SyncPager[SearchItem]` | `SearchResults` |
 | 페이지 이동 | `pager.has_next` / `pager.next_page()` | `page_info.next_page_token` + `search.retrieve()` |
 | 복수 이미지 쿼리 | `query_media_urls`, `query_media_files` 지원 | 미지원 |
+| `sort_option` | 문서에 명시 | 미지원 (파라미터 없음) |
 | `transcription_options` | 문서 미명시 | 지원 (`lexical`, `semantic`) |
 | `include_user_metadata` | 문서 미명시 | 지원 |

@@ -10,12 +10,13 @@ Covers:
     malformed filter, empty search_options list
 
 Test ID format: <category>-<number>
-  SS : Successful Search    (SS-01 ~ SS-13)
-  PA : Pagination           (PA-01 ~ PA-06)
-  TR : Transcription        (TR-01 ~ TR-03)
-  FI : Filtering            (FI-01 ~ FI-03)
-  EC : Edge Cases           (EC-01 ~ EC-05)
-  EH : Error Handling       (EH-01 ~ EH-06)
+  SS : Successful Search      (SS-01 ~ SS-13)
+  PA : Pagination             (PA-01 ~ PA-06)
+  TR : Transcription          (TR-01 ~ TR-03)
+  FI : Filtering              (FI-01 ~ FI-03)
+  EC : Edge Cases             (EC-01 ~ EC-05)
+  EH : Error Handling         (EH-01 ~ EH-08)
+  PI : Parameter Interaction  (PI-01)
 """
 
 import json
@@ -439,3 +440,42 @@ class TestErrorHandling:
                 query_text="a person walking",
             )
         assert exc_info.value.status_code == 400
+
+    def test_EH07_empty_query_text_raises_bad_request(self, client, index_id):
+        """An empty string for query_text should raise BadRequestError."""
+        with pytest.raises((BadRequestError, ApiError)) as exc_info:
+            client.search.create(
+                index_id=index_id,
+                search_options=["visual"],
+                query_text="",
+            )
+        assert exc_info.value.status_code == 400
+
+    def test_EH08_page_limit_zero_raises_bad_request(self, client, index_id):
+        """page_limit=0 (below the minimum of 1) should raise BadRequestError."""
+        with pytest.raises((BadRequestError, ApiError)) as exc_info:
+            client.search.create(
+                index_id=index_id,
+                search_options=["visual"],
+                query_text="a person walking",
+                page_limit=0,
+            )
+        assert exc_info.value.status_code == 400
+
+
+# ---------------------------------------------------------------------------
+# Category 7: Parameter Interaction (PI)
+# ---------------------------------------------------------------------------
+
+class TestParameterInteraction:
+
+    def test_PI01_transcription_options_with_non_transcription_search(self, client, index_id):
+        """transcription_options has no effect when search_options excludes transcription."""
+        result = client.search.create(
+            index_id=index_id,
+            search_options=["visual"],
+            query_text="a person walking",
+            transcription_options=["lexical"],
+        )
+        assert isinstance(result, SearchResults)
+        assert result.data is not None
