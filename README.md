@@ -6,6 +6,8 @@
 
 **[📊 Allure Trend 리포트](https://jhj2867.github.io/twelvelabs-test/allure/)** — 매 실행마다 누적되는 테스트 결과 및 추이 차트 확인 가능
 
+> GitHub Actions가 **매일 한국 시간 오전 9시(UTC 00:00)에 자동으로 전체 테스트를 실행**합니다. `main` 브랜치 push 및 PR 시에도 자동 실행됩니다. Allure 리포트에서 날짜별 추이를 확인할 수 있습니다.
+
 ---
 
 ## 사전 요구사항
