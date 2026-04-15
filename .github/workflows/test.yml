@@ -6,6 +6,8 @@ on:
   pull_request:
     branches: [main]
   workflow_dispatch:
+  schedule:
+    - cron: "0 0 * * *"  # 매일 UTC 00:00 (한국 시간 09:00)
 
 jobs:
   test:
