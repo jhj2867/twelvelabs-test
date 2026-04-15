@@ -144,3 +144,16 @@ pytest tests/test_search.py::TestSuccessfulSearch::test_SS01_returns_search_resu
 ```
 twelvelabs==1.2.2
 ```
+
+> **참고:** [공식 문서](https://docs.twelvelabs.io/sdk-reference/python/search)는 `1.3` 기준으로 작성되어 있으나, PyPI 최신 배포 버전은 `1.2.2`입니다. 테스트는 실제 설치 가능한 `1.2.2` 기준으로 작성했습니다.
+
+### 1.2.2 vs 문서(1.3) 주요 차이점
+
+| 항목 | 문서 (1.3) | 실제 SDK (1.2.2) |
+|---|---|---|
+| 메서드명 | `client.search.query()` | `client.search.create()` |
+| 반환 타입 | `SyncPager[SearchItem]` | `SearchResults` |
+| 페이지 이동 | `pager.has_next` / `pager.next_page()` | `page_info.next_page_token` + `search.retrieve()` |
+| 복수 이미지 쿼리 | `query_media_urls`, `query_media_files` 지원 | 미지원 |
+| `transcription_options` | 문서 미명시 | 지원 (`lexical`, `semantic`) |
+| `include_user_metadata` | 문서 미명시 | 지원 |
