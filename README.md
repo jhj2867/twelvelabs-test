@@ -108,10 +108,10 @@ pytest tests/test_search.py::TestSuccessfulSearch::test_SS01_returns_search_resu
 | TR-01 ~ TR-03 | 트랜스크립션 옵션 | `TestTranscriptionOptions` | 3 | `lexical`, `semantic`, 둘 다 사용 |
 | FI-01 ~ FI-03 | 필터링 | `TestFiltering` | 3 | 재생 시간 범위 필터, 영상 ID 필터, 잘못된 ID 필터 |
 | EC-01 ~ EC-05 | 엣지 케이스 | `TestEdgeCases` | 5 | 검색 결과 없는 쿼리, 긴 쿼리 텍스트(~150 토큰), 세 가지 옵션 동시 사용, 순위 정렬 |
-| EH-01 ~ EH-08 | 에러 처리 | `TestErrorHandling` | 8 | 존재하지 않는 인덱스(404), 잘못된 API 키(401/403), `page_limit > 50`(400), 잘못된 필터 JSON(400), 빈 `search_options`(400), 지원하지 않는 검색 옵션(400), 빈 `query_text`(400), `page_limit=0`(400) |
-| PI-01 | 파라미터 상호작용 | `TestParameterInteraction` | 1 | `transcription_options`과 non-transcription `search_options` 동시 사용 |
+| EH-01 ~ EH-07 | 에러 처리 | `TestErrorHandling` | 7 | 존재하지 않는 인덱스(404), 잘못된 API 키(401/403), `page_limit > 50`(400), 잘못된 필터 JSON(400), 빈 `search_options`(400), 지원하지 않는 검색 옵션(400), 빈 `query_text`(400) |
+| PI-01 | 파라미터 상호작용 | `TestParameterInteraction` | 1 | `transcription_options`을 non-transcription `search_options`와 함께 사용하면 400 에러 |
 
-**총 39개 테스트**
+**총 38개 테스트**
 
 ### 테스트 대상 파라미터
 
