@@ -130,6 +130,24 @@ pytest tests/test_search.py::TestSuccessfulSearch::test_SS01_returns_search_resu
 
 ---
 
+## CI/CD
+
+GitHub Actions(`.github/workflows/test.yml`)가 다음 조건에서 자동으로 전체 테스트를 실행합니다:
+
+| 트리거 | 조건 |
+|---|---|
+| **push** | `main` 브랜치에 커밋 푸시 시 |
+| **pull_request** | `main` 브랜치 대상 PR 생성·업데이트 시 |
+| **schedule** | 매일 KST 09:00 (UTC 00:00) 자동 실행 |
+| **workflow_dispatch** | GitHub Actions 탭에서 수동 트리거 가능 |
+
+### 테스트 결과 확인
+
+- **GitHub Actions 탭** — 각 실행의 커밋별 인라인 테스트 결과 (dorny/test-reporter)
+- **[Allure 리포트](https://jhj2867.github.io/twelvelabs-test/allure/)** — 날짜별 추이 차트 및 상세 결과 (매 실행마다 누적)
+
+---
+
 ## 테스트 방식
 
 모든 테스트는 **통합 테스트**로, 실제 TwelveLabs API를 호출합니다. 목(mock)은 사용하지 않습니다. SDK의 실제 동작을 엔드투엔드로 검증하기 위한 의도적인 선택입니다.
@@ -138,7 +156,7 @@ pytest tests/test_search.py::TestSuccessfulSearch::test_SS01_returns_search_resu
 
 - 테스트 실행 전 인덱스에 최소 1개의 영상이 인덱싱되어 있어야 합니다. 인덱스 생성 및 영상 업로드는 테스트 범위에서 제외했습니다.
 - 호출 메서드: `client.search.create()`. SDK 문서에는 `query()` 메서드가 언급되어 있으나, 설치된 SDK(`twelvelabs==1.2.2`)에서는 `create()`를 사용합니다. 반환 타입은 문서상의 `SyncPager[SearchItem]`이 아닌 `SearchResults`이며, `data`, `page_info`, `search_pool` 필드를 포함합니다.
-- 에러 처리 테스트 중 `index_id` 픽스처를 사용하는 테스트(예: `test_EH06`)는 API가 파라미터 유효성 검사 전에 인증을 먼저 확인하므로 유효한 인증 정보가 필요합니다.
+- 에러 처리 테스트 중 `index_id` 픽스처를 사용하는 테스트(예: `EH-02`)는 API가 파라미터 유효성 검사 전에 인증을 먼저 확인하므로 유효한 인증 정보가 필요합니다.
 
 ---
 
